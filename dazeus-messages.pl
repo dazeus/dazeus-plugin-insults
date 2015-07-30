@@ -1,3 +1,9 @@
+#!/usr/bin/perl
+# Messages plugin for DaZeus
+# Copyright (C) 2014-2015  Aaron van Geffen <aaron@aaronweb.net>
+# 'Je moeder' function (C) 2010 Pen-Pen, 2013 Quis
+# Original module (C) 2007  Sjors Gielen <sjorsgielen@gmail.com>
+
 use strict;
 use warnings;
 use DaZeus;
