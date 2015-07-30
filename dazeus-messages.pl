@@ -118,6 +118,23 @@ $dazeus->subscribe_command("m" => sub {
 	}
 });
 
+# Or, indeed, your father...
+$dazeus->subscribe_command("v" => sub {
+	my ($self, $network, $sender, $channel, $command, $line) = @_;
+
+	# Look up a previously saved message for this channel.
+	if ($line eq "" && defined($lastJeMoederableMessages{$channel})) {
+		$line = $lastJeMoederableMessages{$channel};
+	}
+
+	# Anything interesting to add?
+	if ($line eq "") {
+		reply("Je vader is een null-pointer!", $network, $sender, $channel);
+	} else {
+		reply("Je vader is $line!", $network, $sender, $channel);
+	}
+});
+
 while($dazeus->handleEvents()) {}
 
 #####################################################################
