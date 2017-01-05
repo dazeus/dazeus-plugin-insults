@@ -1,8 +1,7 @@
 #!/usr/bin/perl
-# Messages plugin for DaZeus
-# Copyright (C) 2014-2015  Aaron van Geffen <aaron@aaronweb.net>
+# Retorts plugin for DaZeus
+# Copyright (C) 2017  Aaron van Geffen <aaron@aaronweb.net>
 # 'Je moeder' function (C) 2010 Pen-Pen, 2013 Quis
-# Original module (C) 2007  Sjors Gielen <sjorsgielen@gmail.com>
 
 use strict;
 use warnings;
@@ -16,70 +15,6 @@ if (!$socket) {
 }
 
 my $dazeus = DaZeus->connect($socket);
-
-#####################################################################
-#                       CONTROLLER FUNCTIONS
-#####################################################################
-
-# Test!
-$dazeus->subscribe_command("test" => sub {
-	my ($self, $network, $sender, $channel, @rest) = @_;
-	reply("Test back - I think it works.", $network, $sender, $channel);
-});
-
-# Hey?
-$dazeus->subscribe_command("hey" => sub {
-	my ($self, $network, $sender, $channel, @rest) = @_;
-	reply("Hey $sender!", $network, $sender, $channel);
-});
-
-# Hi?
-$dazeus->subscribe_command("hi" => sub {
-	my ($self, $network, $sender, $channel, @rest) = @_;
-	reply("Hi $sender!", $network, $sender, $channel);
-});
-
-# Hello?
-$dazeus->subscribe_command("hello" => sub {
-	my ($self, $network, $sender, $channel, @rest) = @_;
-	reply("Hello $sender!", $network, $sender, $channel);
-});
-
-# Ping?
-$dazeus->subscribe_command("ping" => sub {
-	my ($self, $network, $sender, $channel, @rest) = @_;
-	reply("Pong!", $network, $sender, $channel);
-});
-
-# Pong?
-$dazeus->subscribe_command("pong" => sub {
-	my ($self, $network, $sender, $channel, @rest) = @_;
-	reply("Ping!", $network, $sender, $channel);
-});
-
-# Sarcasm sign?
-$dazeus->subscribe_command("sarcasm" => sub {
-	my ($self, $network, $sender, $channel, @rest) = @_;
-	reply("+-------+\n|Sarcasm|\n+---+---+\n    | (o.o;\n    o=", $network, $sender, $channel);
-});
-
-# Ordering something?
-$dazeus->subscribe_command("order" => sub {
-	my ($self, $network, $sender, $channel, $command, $line) = @_;
-	my ($what, $forwhom) = $line =~ /^(.+?)\sfor\s(.+)$/i;
-
-	if (!defined($what)) {
-		# Didn't match -- maybe they forgot 'for $somebody'.
-		$what = $line;
-		$forwhom = $sender;
-	}
-	if (!defined($what)) {
-		# Still didn't match -- they probably just said '}order'.
-		reply("Syntax error. Please say }order [something] for [somebody].", $network, $sender, $channel);
-	}
-
-	$dazeus->action($network, $channel, "slides $what down the bar to $forwhom.", $network, $sender, $channel);
-});
 
 # Fetch the hilight character(s).
 my $sigil = $dazeus->getConfig("core", "highlight");
