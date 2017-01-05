@@ -47,9 +47,9 @@ $dazeus->subscribe_command("m" => sub {
 
 	# Anything interesting to add?
 	if ($line eq "") {
-		reply("Je moeder is een null-pointer!", $network, $sender, $channel);
+		$self->reply("Je moeder is een null-pointer!", $network, $sender, $channel);
 	} else {
-		reply("Je moeder is $line!", $network, $sender, $channel);
+		$self->reply("Je moeder is $line!", $network, $sender, $channel);
 	}
 });
 
@@ -64,9 +64,9 @@ $dazeus->subscribe_command("v" => sub {
 
 	# Anything interesting to add?
 	if ($line eq "") {
-		reply("Je vader is een null-pointer!", $network, $sender, $channel);
+		$self->reply("Je vader is een null-pointer!", $network, $sender, $channel);
 	} else {
-		reply("Je vader is $line!", $network, $sender, $channel);
+		$self->reply("Je vader is $line!", $network, $sender, $channel);
 	}
 });
 
@@ -81,24 +81,10 @@ $dazeus->subscribe_command("z" => sub {
 
 	# Anything interesting to add?
 	if ($line eq "") {
-		reply("Je bent zelf een null-pointer!", $network, $sender, $channel);
+		$self->reply("Je bent zelf een null-pointer!", $network, $sender, $channel);
 	} else {
-		reply("Je bent zelf $line!", $network, $sender, $channel);
+		$self->reply("Je bent zelf $line!", $network, $sender, $channel);
 	}
 });
 
 while($dazeus->handleEvents()) {}
-
-#####################################################################
-#                       MODEL FUNCTIONS
-#####################################################################
-
-sub reply {
-	my ($response, $network, $sender, $channel) = @_;
-
-	if ($channel eq $dazeus->getNick($network)) {
-		$dazeus->message($network, $sender, $response);
-	} else {
-		$dazeus->message($network, $channel, $response);
-	}
-}
