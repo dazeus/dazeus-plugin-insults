@@ -70,6 +70,23 @@ $dazeus->subscribe_command("v" => sub {
 	}
 });
 
+# Or, finally, their miserable selves...
+$dazeus->subscribe_command("z" => sub {
+	my ($self, $network, $sender, $channel, $command, $line) = @_;
+
+	# Look up a previously saved message for this channel.
+	if ($line eq "" && defined($lastJeMoederableMessages{$channel})) {
+		$line = $lastJeMoederableMessages{$channel};
+	}
+
+	# Anything interesting to add?
+	if ($line eq "") {
+		reply("Je bent zelf een null-pointer!", $network, $sender, $channel);
+	} else {
+		reply("Je bent zelf $line!", $network, $sender, $channel);
+	}
+});
+
 while($dazeus->handleEvents()) {}
 
 #####################################################################
