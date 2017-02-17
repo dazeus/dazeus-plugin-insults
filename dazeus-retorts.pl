@@ -42,6 +42,8 @@ $dazeus->subscribe("PRIVMSG" => sub {
 		$pair = ["zijn", $2];
 	} elsif ($msg =~ /(?:^|\b)(hebben|heeft|hebt|heb|had|hadden|has|have)\s+([^,.!?]*)/i) {
 		$pair = ["hebben", $2];
+	} elsif ($msg =~ /(?:^|\b)(doen|doet|deden|deed|does|doe|do)\s+([^,.!?]*)/i) {
+		$pair = ["doen", $2];
 	} elsif ($msg =~ /(?:^|\b)((een|an?) [^,.!?]*)/i) {
 		$pair = ["zijn", $1];
 	} else {
@@ -86,12 +88,16 @@ sub wittyRetort {
 	if ($command eq "z") {
 		if ($line->[0] eq "zijn") {
 			$verb = "bent";
+		} elsif ($line->[0] eq "doen") {
+			$verb = "doet";
 		} else {
 			$verb = "hebt";
 		}
 	} else {
 		if ($line->[0] eq "zijn") {
 			$verb = "is";
+		} elsif ($line->[0] eq "doen") {
+			$verb = "doet";
 		} else {
 			$verb = "heeft";
 		}
