@@ -38,7 +38,7 @@ $dazeus->subscribe("PRIVMSG" => sub {
 
 	# Try matching as best as we can, figuring out what verb to use on the way.
 	my $pair;
-	if ($msg =~ /(?:^|\b)(is|ben|bent|zijn|was|waren)\s+([^,.!?]*)/i) {
+	if ($msg =~ /(?:^|\b)(is|ben|bent|zijn|was|waren|'s)\s+([^,.!?]*)/i) {
 		$pair = ["zijn", $2];
 	} elsif ($msg =~ /(?:^|\b)(hebben|heeft|hebt|heb|had|hadden|has|have)\s+([^,.!?]*)/i) {
 		$pair = ["hebben", $2];
