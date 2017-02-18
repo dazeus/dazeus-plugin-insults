@@ -47,7 +47,7 @@ $dazeus->subscribe("PRIVMSG" => sub {
 	} elsif ($msg =~ /(?:^|\b)((een|an?) [^,.!?]*)/i) {
 		$pair = ["zijn", $1];
 	} else {
-		return;
+		$pair = ["zijn", $msg];
 	}
 
 	$lastJeMoederableMessages{$channel} = $pair;
